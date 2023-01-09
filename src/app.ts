@@ -5,7 +5,8 @@ import { setPlateau } from './rover/position.js';
 export function startRover(): void {
     clear();
     print("Mars Rover initiating.......");
-    askQuestion("Set Plateau Max coordinate:", setPlateau);
+    // may need to change question to make user input less open to interpretation
+    askQuestion("Set upper right Plateau coordinates:", setPlateau);
 }
 
 // call function
