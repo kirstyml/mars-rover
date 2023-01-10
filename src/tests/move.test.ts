@@ -1,4 +1,4 @@
-import { moveRover } from '../rover/move';
+import { moveRover, takeInstructions } from '../rover/move';
 
 describe("rotates rover", () => {
     it("should rotate 90 degrees to the left", () => {
@@ -27,5 +27,11 @@ describe("rotates rover", () => {
   describe("does not move rover if next move is off the plateau", () => {
     it("should return the initial position", () => {
       expect(moveRover({ x: 5, y: 5, direction: "N"}, { x: 5, y: 5}, "M")).toEqual({ x: 5, y: 5, direction: "N"});
+    });
+  });
+
+  describe("does not move rover if next move is off the plateau", () => {
+    it("should return the initial position", () => {
+      expect(takeInstructions({ x: 1, y: 2, direction: "N"}, { x: 5, y: 5}, ["L","M","L","M","L","M","L","M","M"])).toEqual({ x: 1, y: 3, direction: "N"});
     });
   });

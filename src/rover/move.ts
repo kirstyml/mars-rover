@@ -17,6 +17,14 @@ interface Position {
 const instructions = ["L", "R", "M"] as const;
 type InstructionType = typeof instructions[number];
 
+export function takeInstructions(initialPosition: Position, plateauCoord: Coord, instructionSet: Array<InstructionType>) {
+    let nextPosition = {...initialPosition}
+    for (let i = 0; i <= instructionSet.length - 1; i++) {
+       nextPosition = moveRover(nextPosition, plateauCoord, instructionSet[i]);
+    }
+    return nextPosition;
+}
+
 export function isValidMove(position: Position, plateauCoord: Coord) {
     return position.x <= plateauCoord.x && position.y <= plateauCoord.y;
 }
