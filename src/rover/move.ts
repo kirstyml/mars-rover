@@ -1,3 +1,5 @@
+// import { isValidCoord } from './position';
+
 interface Coord {
     x: number,
     y: number
@@ -14,6 +16,10 @@ interface Position {
 
 const instructions = ["L", "R", "M"] as const;
 type InstructionType = typeof instructions[number];
+
+export function isValidMove(position: Position, plateauCoord: Coord) {
+    return position.x <= plateauCoord.x && position.y <= plateauCoord.y;
+}
 
 export function moveRover(initialPosition: Position, plateauCoord: Coord, instruction: InstructionType) {
     const endPosition = {...initialPosition};
@@ -40,7 +46,10 @@ export function moveRover(initialPosition: Position, plateauCoord: Coord, instru
         if (initialPosition.direction === 'W') {
             endPosition.x -= 1;
         }
-        // TODO: validate if can make move
+        // validate if can make move
+        if (!isValidMove(endPosition, plateauCoord)) {
+            return initialPosition;
+        }
     }
 
     return endPosition;
