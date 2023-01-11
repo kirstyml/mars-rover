@@ -1,4 +1,6 @@
 import * as readline from 'node:readline';
+import { setPlateau, setInitialPosition, setInstructionSet } from './controller.js';
+import { takeInstructions } from './rover.js';
 
 export function print(str: string): void {
 	console.log(str);
@@ -15,7 +17,17 @@ const reader = readline.createInterface({
 	output: process.stdout,
 });
 
-// this function allows us to prompt the user with a question, and call a callback function with whatever string has been input
-export function askQuestion(question: string, callback: (arg: string) => void) {
-	reader.question(question, callback);
+export function getInputs(plateauQ : string, initialPositionQ : string, instructionsQ : string) {
+	reader.question(plateauQ, (plateauInput) => {
+		const plateauCoord = setPlateau(plateauInput);
+		reader.question(initialPositionQ, (positionInput) => {
+			const initialPosition = setInitialPosition(positionInput);
+			reader.question(instructionsQ, (instructionsInput) => {
+				const instructionArray = setInstructionSet(instructionsInput);
+				console.log("End position for Rover:");
+				// TODO: convert Postion type back to string for diaply
+				console.log(takeInstructions(initialPosition, plateauCoord, instructionArray));
+			})
+		})
+	});
 }

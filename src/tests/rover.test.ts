@@ -1,4 +1,4 @@
-import { moveRover, takeInstructions } from '../rover/move';
+import { moveRover, takeInstructions } from '../rover';
 
 describe("rotates rover", () => {
   it("should rotate 90 degrees to the left", () => {

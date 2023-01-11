@@ -1,24 +1,13 @@
-interface Coord {
-    x: number,
-    y: number
-};
+import { Coord, Position, directions, DirectionType, instructions, InstructionType } from "./types.js"
 
-const directions = ["N", "E", "S", "W"] as const;
-type DirectionType = typeof directions[number];
-
-interface Position {
-    x: number,
-    y: number,
-    direction: DirectionType
-};
-
-const instructions = ["L", "R", "M"] as const;
-type InstructionType = typeof instructions[number];
-
-export function takeInstructions(initialPosition: Position, plateauCoord: Coord, instructionSet: Array<InstructionType>) {
+//TODO: can get Array<InstructionType> working
+export function takeInstructions(initialPosition: Position, plateauCoord: Coord, instructionSet: Array<string>) {
     let nextPosition = { ...initialPosition }
     for (let i = 0; i <= instructionSet.length - 1; i++) {
-        nextPosition = moveRover(nextPosition, plateauCoord, instructionSet[i]);
+        if(instructionSet[i] === "L" || instructionSet[i] === "R" || instructionSet[i] === "M") {
+            nextPosition = moveRover(nextPosition, plateauCoord, instructionSet[i]);
+        }
+        
     }
     return nextPosition;
 }
@@ -27,7 +16,8 @@ export function isValidMove(position: Position, plateauCoord: Coord) {
     return position.x <= plateauCoord.x && position.y <= plateauCoord.y;
 }
 
-export function moveRover(initialPosition: Position, plateauCoord: Coord, instruction: InstructionType) {
+//TODO: can get Array<InstructionType> working
+export function moveRover(initialPosition: Position, plateauCoord: Coord, instruction: string) {
     const endPosition = { ...initialPosition };
     const indexCurrentDirection = directions.indexOf(initialPosition.direction);
     // spin left if L
