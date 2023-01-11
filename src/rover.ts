@@ -1,5 +1,19 @@
 import { Coord, Position, directions, DirectionType, instructions, InstructionType } from "./types.js"
 
+export class Rover {
+    plateau: Coord;
+    position: Position;
+
+    constructor(plateau: Coord, position: Position) {
+        this.plateau = plateau;
+        this.position = position;
+    }
+
+    move(instructions: Array<string>) {
+        this.position = takeInstructions(this.position, this.plateau, instructions);
+    }
+};
+
 //TODO: can get Array<InstructionType> working
 export function takeInstructions(initialPosition: Position, plateauCoord: Coord, instructionSet: Array<string>) {
     let nextPosition = { ...initialPosition }
