@@ -1,6 +1,4 @@
 import * as readline from 'node:readline';
-import { setPlateau, setInitialPosition, setInstructionSet } from './controller.js';
-import { Rover, takeInstructions } from './rover.js';
 
 export function print(str: string): void {
 	console.log(str);
@@ -27,21 +25,3 @@ export function end() : void {
 	reader.close();
 	console.log("Goodbye!")
 }
-
-// export function getInputs(plateauQ : string, initialPositionQ : string, instructionsQ : string) {
-// 	reader.question(plateauQ, (plateauInput) => {
-// 		const plateauCoord = setPlateau(plateauInput);
-// 		reader.question(initialPositionQ, (positionInput) => {
-// 			const initialPosition = setInitialPosition(positionInput);
-// 			const rover = new Rover(plateauCoord, initialPosition);
-// 			console.log(rover);
-// 			reader.question(instructionsQ, (instructionsInput) => {
-// 				const instructionArray = setInstructionSet(instructionsInput);
-// 				console.log("End position for Rover:");
-// 				// TODO: convert Postion type back to string for diaply
-// 				rover.move(instructionArray);
-// 				console.log(rover.position);
-// 			})
-// 		})
-// 	});
-// }
