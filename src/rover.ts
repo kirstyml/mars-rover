@@ -18,10 +18,11 @@ export class Rover {
 export function takeInstructions(initialPosition: Position, plateauCoord: Coord, instructionSet: Array<string>) {
     let nextPosition = { ...initialPosition }
     for (let i = 0; i <= instructionSet.length - 1; i++) {
-        if(instructionSet[i] === "L" || instructionSet[i] === "R" || instructionSet[i] === "M") {
-            nextPosition = makeMove(nextPosition, plateauCoord, instructionSet[i]);
+        const inst = instructionSet[i];
+        if(inst === "L" || inst === "R" || inst === "M") {
+            nextPosition = makeMove(nextPosition, plateauCoord, inst);
         }
-        
+        else console.log("invalid move.");
     }
     return nextPosition;
 }
@@ -31,7 +32,7 @@ export function isValidMove(position: Position, plateauCoord: Coord) {
 }
 
 //TODO: can get Array<InstructionType> working
-export function makeMove(initialPosition: Position, plateauCoord: Coord, instruction: string) {
+export function makeMove(initialPosition: Position, plateauCoord: Coord, instruction: InstructionType) {
     const endPosition = { ...initialPosition };
     const indexCurrentDirection = directions.indexOf(initialPosition.direction);
     // spin left if L

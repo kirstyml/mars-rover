@@ -21,12 +21,13 @@ export function setPlateauCoord(inputCoord: string) {
     else throw new Error("Not a valid coordinate. Must be number space number");
 }
 
-function inputToPosition(inputPosition : string) : Position {
-    if (inputPosition[4] === "N" || inputPosition[4] === "E" || inputPosition[4] === "S" || inputPosition[4] === "W" ) {
+export function inputToPosition(inputPosition : string) : Position {
+    const positionArray = inputPosition.split(" ");
+    if (positionArray[2] === "N" || positionArray[2] === "E" || positionArray[2] === "S" || positionArray[2] === "W" ) {
         return {
-            x: parseInt(inputPosition[0]),
-            y: parseInt(inputPosition[2]),
-            direction: inputPosition[4]
+            x: parseInt(positionArray[0]),
+            y: parseInt(positionArray[1]),
+            direction: positionArray[2]
         }
     }
     else throw new Error("not a valid position. Direction must be a compass point");
@@ -38,15 +39,20 @@ export function isValidPosition(inputPosition: string) : boolean {
 }
 
 export function setInitialPosition(inputPosition: string) : Position {
-    // if(isValidPosition(inputPosition)) {
+    if(isValidPosition(inputPosition)) {
         return inputToPosition(inputPosition)
-    // }
+    }
+    else throw new Error("Not a valid position. Must be number space number");
 }
 
 //TODO: can get Array<InstructionType> working
-export function setInstructionSet(instructions: string) : Array<string> {
+
+export function setInstructionSet(instructions: string) {
     const instructionArray = instructions.split("");
-    return instructionArray;
+    if (instructionArray.every(item => instructions.includes(item))) {
+        return instructionArray;
+    }
+    else throw new Error("Not a valid instruction string. Must only contain the characters L R or M");
 }
 
 export function createRover(plateauInput: string, positionInput: string) {

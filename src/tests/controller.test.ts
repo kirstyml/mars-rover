@@ -1,4 +1,4 @@
-import { inputToCoord, setPlateauCoord, isValidCoord, isValidPosition } from '../controller';
+import { inputToCoord, setPlateauCoord, isValidCoord, isValidPosition, inputToPosition, setInitialPosition } from '../controller';
 
 describe("inputToCoord takes a string and returns a valid Coord", () => {
     it("should return a Coord type from a valid string", () => {
@@ -50,5 +50,23 @@ describe("isValidPosition takes a string and true if it is a valid position", ()
         expect(isValidPosition("12E")).toBe(false);
         expect(isValidPosition("1,2,E")).toBe(false);
         expect(isValidPosition("1 2 F")).toBe(false);
+    });
+});
+
+describe("inputToPosition takes a string and returns a valid Position", () => {
+    it("should return a Position type from a valid string", () => {
+        expect(inputToPosition("1 2 N")).toEqual({ x: 1, y: 2, direction: "N" });
+    });
+});
+
+describe("setInitialPosition validates the user input position and returns the InitialPosition", () => {
+    it("should return a position type from a string: digit space digit", () => {
+        expect(setInitialPosition("1 2 N")).toEqual({ x: 1, y: 2, direction: "N" });
+        expect(setInitialPosition("111 222 E")).toEqual({ x: 111, y: 222, direction: "E"});
+    });
+    it("should throw an error if the user input is the wrong format", () => {
+        expect(() => {
+            setInitialPosition("1 F")
+        }).toThrow();
     });
 });

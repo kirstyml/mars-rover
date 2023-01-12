@@ -13,4 +13,4 @@ export interface Position {
 };
 
 export const instructions = ["L", "R", "M"] as const;
-export type InstructionType = typeof instructions[number];
+export type InstructionType = "L" | "R" | "M";
