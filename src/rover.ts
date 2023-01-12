@@ -1,4 +1,4 @@
-import { Coord, Position, directions, DirectionType, instructions, InstructionType } from "./types.js"
+import { Coord, Position, directions, DirectionType, instructions, InstructionType } from "./types"
 
 export class Rover {
     plateau: Coord;
@@ -19,7 +19,7 @@ export function takeInstructions(initialPosition: Position, plateauCoord: Coord,
     let nextPosition = { ...initialPosition }
     for (let i = 0; i <= instructionSet.length - 1; i++) {
         if(instructionSet[i] === "L" || instructionSet[i] === "R" || instructionSet[i] === "M") {
-            nextPosition = moveRover(nextPosition, plateauCoord, instructionSet[i]);
+            nextPosition = makeMove(nextPosition, plateauCoord, instructionSet[i]);
         }
         
     }
@@ -31,7 +31,7 @@ export function isValidMove(position: Position, plateauCoord: Coord) {
 }
 
 //TODO: can get Array<InstructionType> working
-export function moveRover(initialPosition: Position, plateauCoord: Coord, instruction: string) {
+export function makeMove(initialPosition: Position, plateauCoord: Coord, instruction: string) {
     const endPosition = { ...initialPosition };
     const indexCurrentDirection = directions.indexOf(initialPosition.direction);
     // spin left if L
