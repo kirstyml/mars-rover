@@ -52,9 +52,9 @@ export function createRover(plateauInput: string, positionInput: string) {
     return new Rover(plateauCoord, initialPosition);
 }
 
-export function moveRover(plateauInput: string, positionInput: string) {
-    const plateauCoord = setPlateau(plateauInput);
-    const initialPosition = setInitialPosition(positionInput);
-    return new Rover(plateauCoord, initialPosition);
+export function moveRover(rover: Rover, instructionsInput: string) {
+    const instructionsArray = setInstructionSet(instructionsInput);
+    rover.move(instructionsArray);
+    return rover.position;
 }
 

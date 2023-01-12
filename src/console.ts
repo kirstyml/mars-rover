@@ -23,6 +23,11 @@ export async function input(textQ : string) : Promise<string> {
 	});
 }
 
+export function end() : void {
+	reader.close();
+	console.log("Goodbye!")
+}
+
 // export function getInputs(plateauQ : string, initialPositionQ : string, instructionsQ : string) {
 // 	reader.question(plateauQ, (plateauInput) => {
 // 		const plateauCoord = setPlateau(plateauInput);
