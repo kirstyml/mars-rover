@@ -3,7 +3,7 @@ import { Rover } from "./rover"
 
 export function isValidCoord(inputCoord : string) : Boolean {
     const coordArray = inputCoord.split(" ");
-    return coordArray.length === 2 && coordArray.every(item => /\d/.test(item));
+    return coordArray.length === 2 && coordArray.every(item => /^\d+$/.test(item));
 }
 
 export function inputToCoord(inputCoord : string) : Coord {
@@ -31,6 +31,11 @@ function inputToPosition(inputPosition : string) : Position {
     }
     else throw new Error("not a valid position. Direction must be a compass point");
 };
+
+export function isValidPosition(inputPosition: string) : boolean {
+    const positionArray = inputPosition.split(" ");
+    return positionArray.length === 3 && /^\d+$/.test(positionArray[0]) && /^\d+$/.test(positionArray[1]) && /^N|E|S|W$/.test(positionArray[2]);
+}
 
 export function setInitialPosition(inputPosition: string) : Position {
     // if(isValidPosition(inputPosition)) {

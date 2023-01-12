@@ -1,4 +1,4 @@
-import { inputToCoord, setPlateauCoord, isValidCoord } from '../controller';
+import { inputToCoord, setPlateauCoord, isValidCoord, isValidPosition } from '../controller';
 
 describe("inputToCoord takes a string and returns a valid Coord", () => {
     it("should return a Coord type from a valid string", () => {
@@ -16,6 +16,7 @@ describe("isValidCoord takes a string and true if it is a valid coord", () => {
         expect(isValidCoord("12")).toBe(false);
         expect(isValidCoord("1 F")).toBe(false);
         expect(isValidCoord("1,2")).toBe(false);
+        expect(isValidCoord("100 2FF")).toBe(false);
     });
 });
 
@@ -36,3 +37,18 @@ describe("setPlateau validates the user input coord and returns the Plateau coor
     });
 });
 
+describe("isValidPosition takes a string and true if it is a valid position", () => {
+    it("should return a true from a valid string", () => {
+        expect(isValidPosition("1 2 N")).toBe(true);
+        expect(isValidPosition("111 222 E")).toBe(true);
+    });
+    it("should return false from an invalid string", () => {
+        expect(isValidPosition("1")).toBe(false);
+        expect(isValidPosition("12")).toBe(false);
+        expect(isValidPosition("1 F")).toBe(false);
+        expect(isValidPosition("1,2")).toBe(false);
+        expect(isValidPosition("12E")).toBe(false);
+        expect(isValidPosition("1,2,E")).toBe(false);
+        expect(isValidPosition("1 2 F")).toBe(false);
+    });
+});

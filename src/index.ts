@@ -1,11 +1,10 @@
 import { clear, print, input, end } from './console';
-import { createRover, moveRover } from './controller';
+import { createRover, moveRover, isValidCoord } from './controller';
 
 export async function startRover() {
     clear();
     print("Mars Rover initiating.......");
-    const inputPlateau = await input("Enter the maximum Plateau Coord:");
-    console.log(inputPlateau);
+    const inputPlateau = await input("Enter the maximum Plateau Coord (number number):");
     const inputPosition = await input("Enter the rover initial position:");
     const rover = createRover(inputPlateau, inputPosition);
     let inputAdditionalMoves = "Y";
