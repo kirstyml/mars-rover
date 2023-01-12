@@ -45,3 +45,7 @@ export function setInstructionSet(instructions: string) : Array<string> {
     return instructionArray;
 }
 
+export function createRover() {
+    
+}
+
