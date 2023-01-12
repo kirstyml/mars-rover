@@ -1,4 +1,12 @@
-import { inputToCoord, setPlateauCoord, isValidCoord, isValidPosition, inputToPosition, setInitialPosition } from '../controller';
+import { 
+    inputToCoord, 
+    setPlateauCoord, 
+    isValidCoord, 
+    isValidPosition, 
+    inputToPosition, 
+    setInitialPosition,
+    setInstructionSet
+ } from '../controller';
 
 describe("inputToCoord takes a string and returns a valid Coord", () => {
     it("should return a Coord type from a valid string", () => {
@@ -17,6 +25,7 @@ describe("isValidCoord takes a string and true if it is a valid coord", () => {
         expect(isValidCoord("1 F")).toBe(false);
         expect(isValidCoord("1,2")).toBe(false);
         expect(isValidCoord("100 2FF")).toBe(false);
+        expect(isValidCoord("")).toBe(false);
     });
 });
 
@@ -35,6 +44,11 @@ describe("setPlateau validates the user input coord and returns the Plateau coor
             setPlateauCoord("12")
         }).toThrow();
     });
+    it("should throw an error if the user input is empty", () => {
+        expect(() => {
+            setPlateauCoord("")
+        }).toThrow();
+    });
 });
 
 describe("isValidPosition takes a string and true if it is a valid position", () => {
@@ -50,6 +64,7 @@ describe("isValidPosition takes a string and true if it is a valid position", ()
         expect(isValidPosition("12E")).toBe(false);
         expect(isValidPosition("1,2,E")).toBe(false);
         expect(isValidPosition("1 2 F")).toBe(false);
+        expect(isValidPosition("")).toBe(false);
     });
 });
 
@@ -67,6 +82,22 @@ describe("setInitialPosition validates the user input position and returns the I
     it("should throw an error if the user input is the wrong format", () => {
         expect(() => {
             setInitialPosition("1 F")
+        }).toThrow();
+        expect(() => {
+            setInitialPosition("")
+        }).toThrow();
+    });
+});
+
+describe("setInstructionSet should return a valid array of instructions", () => {
+    it("should return a position type from a string: digit space digit", () => {
+        expect(setInstructionSet("LMLMLM")).toEqual(["L","M","L","M","L","M"]);
+        expect(setInstructionSet("R")).toEqual(["R"]);
+        expect(setInstructionSet("")).toEqual([]);
+    });
+    it("should throw an error if the user input is the wrong format", () => {
+        expect(() => {
+            setInstructionSet("1 F")
         }).toThrow();
     });
 });

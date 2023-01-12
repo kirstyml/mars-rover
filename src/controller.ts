@@ -45,11 +45,12 @@ export function setInitialPosition(inputPosition: string) : Position {
     else throw new Error("Not a valid position. Must be number space number");
 }
 
-//TODO: can get Array<InstructionType> working
-
-export function setInstructionSet(instructions: string) {
-    const instructionArray = instructions.split("");
-    if (instructionArray.every(item => instructions.includes(item))) {
+export function setInstructionSet(instructionsInput: string) : Array<string> {
+    const instructionArray = instructionsInput.split("");
+    // HELP: cannot get typescript to recognise that this is an array of instructions
+    // My solution is to keep as an array of strings and check type of each item in the array in the move 
+    // method in the rover class.
+    if (instructionArray.every(item => item === "L" || item === "R" || item === "M")) {
         return instructionArray;
     }
     else throw new Error("Not a valid instruction string. Must only contain the characters L R or M");
