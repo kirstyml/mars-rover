@@ -1,4 +1,5 @@
-import { Coord, Position, directions, instructions, InstructionType } from "./types.js"
+import { Coord, Position, directions, instructions, InstructionType } from "./types"
+import { Rover } from "./rover"
 
 // export function isValidCoord(inputCoord : string) : Boolean {
 //     // true if fits pattern of number space number
@@ -45,7 +46,15 @@ export function setInstructionSet(instructions: string) : Array<string> {
     return instructionArray;
 }
 
-export function createRover() {
-    
+export function createRover(plateauInput: string, positionInput: string) {
+    const plateauCoord = setPlateau(plateauInput);
+    const initialPosition = setInitialPosition(positionInput);
+    return new Rover(plateauCoord, initialPosition);
+}
+
+export function moveRover(plateauInput: string, positionInput: string) {
+    const plateauCoord = setPlateau(plateauInput);
+    const initialPosition = setInitialPosition(positionInput);
+    return new Rover(plateauCoord, initialPosition);
 }
 
