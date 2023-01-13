@@ -1,7 +1,9 @@
-import { makeMove, takeInstructions, isValidMove } from '../rover';
+import { makeMove, takeInstructions, isValidMove, Rover } from '../rover';
 import { Plateau } from '../plateau';
 
 const newPlateau = new Plateau({ x: 5, y: 5 });
+const plateauWithRovers = new Plateau({ x: 5, y: 5 });
+plateauWithRovers.addRover(new Rover(plateauWithRovers, { x: 1, y: 3, direction: "N"}));
 
 describe("rotates rover", () => {
   it("should rotate 90 degrees to the left", () => {
@@ -28,6 +30,9 @@ describe("can tell if move is valid", () => {
     expect(isValidMove({ x: 1, y: 6, direction: "N" }, newPlateau)).toBe(false);
     expect(isValidMove({ x: -5, y: 5, direction: "N" }, newPlateau)).toBe(false);
   });
+  it("should return false if move is into a Rover", () => {
+    expect(isValidMove({ x: 1, y: 3, direction: "N" }, plateauWithRovers)).toBe(false);
+  });
 });
 
 describe("moves rover forward", () => {
@@ -51,3 +56,9 @@ describe("does not move rover if next move is off the plateau", () => {
     expect(takeInstructions({ x: 3, y: 3, direction: "E" }, newPlateau, ["M", "M", "R", "M", "M", "R", "M", "R", "R", "M"])).toEqual({ x: 5, y: 1, direction: "E" });
   });
 });
+
+// describe("does not move rover if there is another rover", () => {
+//   it("should return the initial position", () => {
+//     expect(makeMove({ x: 1, y: 2, direction: "N" }, plateauWithRovers, "M")).toEqual({ x: 1, y: 2, direction: "N" });
+//   });
+// });

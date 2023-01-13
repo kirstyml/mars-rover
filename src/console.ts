@@ -32,5 +32,5 @@ export async function inputWithValidation(questionText: string, inputIsValid: (a
 
 export function end() : void {
 	reader.close();
-	console.log("Goodbye!")
+	console.log("Goodbye!");
 }
