@@ -32,10 +32,13 @@ export function isValidMove(position: Position, plateau: Plateau) {
     const xPositionValid = position.x <= plateau.maxX && position.x >= plateau.minX;
     const yPositionValid = position.y <= plateau.maxY && position.y >= plateau.minY;
     const roverPositions = plateau.getRoverPositions();
-    // TODO: need to create noRoverInWay function, this will always be true
-    // trying to compare object to object.
-    const noRoverInWay = !roverPositions.includes(position);
-    return xPositionValid && yPositionValid && noRoverInWay;
+    let roverInWay = false;
+    roverPositions.forEach(otherRoverPosition => {
+        if (position.x === otherRoverPosition.x && position.y === otherRoverPosition.y) {
+            roverInWay = true;
+        }
+    });
+    return xPositionValid && yPositionValid && !roverInWay;
 }
 
 //TODO: can get Array<InstructionType> working
