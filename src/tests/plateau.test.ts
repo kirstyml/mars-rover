@@ -3,7 +3,7 @@ import { Plateau } from '../plateau';
 
 const newPlateau = new Plateau({ x: 5, y: 5 });
 const roversPlateau = new Plateau({ x: 5, y: 5});
-const rover1 = new Rover({ x : 5, y: 5}, { x: 1, y: 2, direction: "N"});
+const rover1 = new Rover(roversPlateau, { x: 1, y: 2, direction: "N"});
 roversPlateau.addRover(rover1);
 
 describe("Plateau should be able to add rovers", () => {

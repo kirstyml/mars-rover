@@ -1,10 +1,11 @@
 import { Coord, Position, directions, DirectionType, instructions, InstructionType } from "./types"
+import { Plateau } from "./plateau";
 
 export class Rover {
-    plateau: Coord;
+    plateau: Plateau;
     position: Position;
 
-    constructor(plateau: Coord, position: Position) {
+    constructor(plateau: Plateau, position: Position) {
         this.plateau = plateau;
         this.position = position;
     }
@@ -15,24 +16,29 @@ export class Rover {
 };
 
 //TODO: can get Array<InstructionType> working
-export function takeInstructions(initialPosition: Position, plateauCoord: Coord, instructionSet: Array<string>) {
+export function takeInstructions(initialPosition: Position, plateau: Plateau, instructionSet: Array<string>) {
     let nextPosition = { ...initialPosition }
     for (let i = 0; i <= instructionSet.length - 1; i++) {
         const inst = instructionSet[i];
         if(inst === "L" || inst === "R" || inst === "M") {
-            nextPosition = makeMove(nextPosition, plateauCoord, inst);
+            nextPosition = makeMove(nextPosition, plateau, inst);
         }
         else console.log("invalid move.");
     }
     return nextPosition;
 }
 
-export function isValidMove(position: Position, plateauCoord: Coord) {
-    return position.x <= plateauCoord.x && position.y <= plateauCoord.y;
+export function isValidMove(position: Position, plateau: Plateau) {
+    const xPositionValid = position.x <= plateau.maxX && position.x >= plateau.minX;
+    const yPositionValid = position.y <= plateau.maxY && position.y >= plateau.minY;
+    const roverPositions = plateau.getRoverPositions();
+    const noRoverInWay = !roverPositions.includes(position);
+    return xPositionValid && yPositionValid && noRoverInWay;
+    // return position.x <= plateauCoord.x && position.y <= plateauCoord.y;
 }
 
 //TODO: can get Array<InstructionType> working
-export function makeMove(initialPosition: Position, plateauCoord: Coord, instruction: InstructionType) {
+export function makeMove(initialPosition: Position, plateau: Plateau, instruction: InstructionType) {
     const endPosition = { ...initialPosition };
     const indexCurrentDirection = directions.indexOf(initialPosition.direction);
     // spin left if L
@@ -58,7 +64,7 @@ export function makeMove(initialPosition: Position, plateauCoord: Coord, instruc
             endPosition.x -= 1;
         }
         // validate if can make move
-        if (!isValidMove(endPosition, plateauCoord)) {
+        if (!isValidMove(endPosition, plateau)) {
             return initialPosition;
         }
     }

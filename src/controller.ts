@@ -1,5 +1,6 @@
-import { Coord, Position, directions, instructions, InstructionType } from "./types"
-import { Rover } from "./rover"
+import { Coord, Position, directions, instructions, InstructionType } from "./types";
+import { Rover } from "./rover";
+import { Plateau } from "./plateau";
 
 export function isValidCoord(inputCoord : string) : Boolean {
     const coordArray = inputCoord.split(" ");
@@ -14,9 +15,10 @@ export function inputToCoord(inputCoord : string) : Coord {
     }
 };
 
-export function setPlateauCoord(inputCoord: string) {
+export function setPlateau(inputCoord: string) {
     if (isValidCoord(inputCoord)) {
-        return inputToCoord(inputCoord);
+        const validCoord = inputToCoord(inputCoord);
+        return new Plateau(validCoord);
     }
     else throw new Error("Not a valid coordinate. Must be number space number");
 }
@@ -57,9 +59,9 @@ export function setInstructionSet(instructionsInput: string) : Array<string> {
 }
 
 export function createRover(plateauInput: string, positionInput: string) {
-    const plateauCoord = setPlateauCoord(plateauInput);
+    const plateau = setPlateau(plateauInput);
     const initialPosition = setInitialPosition(positionInput);
-    return new Rover(plateauCoord, initialPosition);
+    return new Rover(plateau, initialPosition);
 }
 
 export function moveRover(rover: Rover, instructionsInput: string) {
