@@ -2,7 +2,7 @@ import { Coord, Position, directions, instructions, InstructionType } from "./ty
 import { Rover } from "./rover";
 import { Plateau } from "./plateau";
 
-export function isValidCoord(inputCoord : string) : Boolean {
+export function isValidCoord(inputCoord : string) : boolean {
     const coordArray = inputCoord.split(" ");
     return coordArray.length === 2 && coordArray.every(item => /^\d+$/.test(item));
 }
@@ -48,14 +48,19 @@ export function setInitialPosition(inputPosition: string) : Position {
 }
 
 export function setInstructionSet(instructionsInput: string) : Array<string> {
-    const instructionArray = instructionsInput.split("");
+    const isValid = isValidInstructions(instructionsInput);
+    if (isValid) {
+        return instructionsInput.split("");
+    }
     // HELP: cannot get typescript to recognise that this is an array of instructions
     // My solution is to keep as an array of strings and check type of each item in the array in the move 
     // method in the rover class.
-    if (instructionArray.every(item => item === "L" || item === "R" || item === "M")) {
-        return instructionArray;
-    }
     else throw new Error("Not a valid instruction string. Must only contain the characters L R or M");
+}
+
+export function isValidInstructions(instructionsInput: string) : boolean {
+    const instructionArray = instructionsInput.split("");
+    return instructionArray.every(item => item === "L" || item === "R" || item === "M") && instructionArray.length > 0;
 }
 
 export function createRover(plateauInput: string, positionInput: string) {

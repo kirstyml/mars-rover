@@ -5,6 +5,7 @@ import {
     isValidPosition, 
     inputToPosition, 
     setInitialPosition,
+    isValidInstructions,
     setInstructionSet
  } from '../controller';
  import { Plateau } from '../plateau';
@@ -90,15 +91,29 @@ describe("setInitialPosition validates the user input position and returns the I
     });
 });
 
+describe("isValidInstruction takes a string and true if it is a valid position", () => {
+    it("should return a true from a valid string", () => {
+        expect(isValidInstructions("LRM")).toBe(true);
+        expect(isValidInstructions("M")).toBe(true);
+    });
+    it("should return false from an invalid string", () => {
+        expect(isValidInstructions("1")).toBe(false);
+        expect(isValidInstructions("Left")).toBe(false);
+        expect(isValidInstructions("")).toBe(false);
+    });
+});
+
 describe("setInstructionSet should return a valid array of instructions", () => {
     it("should return a position type from a string: digit space digit", () => {
         expect(setInstructionSet("LMLMLM")).toEqual(["L","M","L","M","L","M"]);
         expect(setInstructionSet("R")).toEqual(["R"]);
-        expect(setInstructionSet("")).toEqual([]);
     });
     it("should throw an error if the user input is the wrong format", () => {
         expect(() => {
             setInstructionSet("1 F")
+        }).toThrow();
+        expect(() => {
+            setInstructionSet("")
         }).toThrow();
     });
 });
