@@ -8,6 +8,7 @@ export class Rover {
     constructor(plateau: Plateau, position: Position) {
         this.plateau = plateau;
         this.position = position;
+        plateau.addRover(this);
     }
 
     move(instructions: Array<string>) {
