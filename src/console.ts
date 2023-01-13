@@ -17,7 +17,7 @@ const reader = readline.createInterface({
 
 export async function input(textQ : string) : Promise<string> {
 	return new Promise ((resolve) => {
-		reader.question(textQ, (answer) => answer);
+		reader.question(textQ, (answer) => resolve(answer));
 	});
 }
 
