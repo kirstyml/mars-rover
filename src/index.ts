@@ -1,5 +1,5 @@
 import { clear, print, input, inputWithValidation, end } from './console';
-import { createRover, moveRover, isValidCoord, isValidPosition, isValidInstructions } from './controller';
+import { createRover, moveRover, isValidCoord, isValidPosition, isValidInstructions, setPlateau } from './controller';
 
 export async function startRover() {
     clear();
@@ -9,13 +9,13 @@ export async function startRover() {
         isValidCoord, 
         "Incorrect formatting. Please enter coordinate again"
     );
-    console.log(`the inputPlateau save ${inputPlateau}`)
+    const plateau = setPlateau(inputPlateau);
     const inputPosition = await inputWithValidation(
         "Enter the rover initial position (number number direction):",
         isValidPosition,
         "Your input is not of the format x y direction"
     );
-    const rover = createRover(inputPlateau, inputPosition);
+    const rover = createRover(plateau, inputPosition);
     let inputAdditionalMoves = "Y";
     if (inputAdditionalMoves === "Y") {
         do {
@@ -29,7 +29,7 @@ export async function startRover() {
             inputAdditionalMoves = await input("Would you like to move the Rover again? Y/N");
         } while (inputAdditionalMoves === "Y");
     }
-    console.log("Rover out");
+    console.log("Mission control out");
     end();
 }
 

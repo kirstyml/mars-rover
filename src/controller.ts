@@ -63,8 +63,7 @@ export function isValidInstructions(instructionsInput: string) : boolean {
     return instructionArray.every(item => item === "L" || item === "R" || item === "M") && instructionArray.length > 0;
 }
 
-export function createRover(plateauInput: string, positionInput: string) {
-    const plateau = setPlateau(plateauInput);
+export function createRover(plateau: Plateau, positionInput: string) {
     const initialPosition = setInitialPosition(positionInput);
     return new Rover(plateau, initialPosition);
 }
