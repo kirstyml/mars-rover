@@ -21,6 +21,15 @@ export async function input(textQ : string) : Promise<string> {
 	});
 }
 
+export async function inputWithValidation(questionText: string, inputIsValid: (arg: string) => boolean, errorText: string) {
+    let userInput = await input(questionText);
+    if (!inputIsValid(userInput)) {
+        console.log(errorText);
+        userInput = await inputWithValidation(questionText, inputIsValid, errorText);
+    }
+    return Promise.resolve(userInput);
+}
+
 export function end() : void {
 	reader.close();
 	console.log("Goodbye!")

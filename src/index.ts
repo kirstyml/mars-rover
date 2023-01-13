@@ -1,19 +1,32 @@
-import { clear, print, input, end } from './console';
-import { createRover, moveRover, isValidCoord } from './controller';
+import { clear, print, input, inputWithValidation, end } from './console';
+import { createRover, moveRover, isValidCoord, isValidPosition, isValidInstructions } from './controller';
 
 export async function startRover() {
     clear();
     print("Mars Rover initiating.......");
-    const inputPlateau = await input("Enter the maximum Plateau Coord (number number):");
-    const inputPosition = await input("Enter the rover initial position:");
+    const inputPlateau = await inputWithValidation(
+        "Enter the maximum Plateau Coord (number number):", 
+        isValidCoord, 
+        "Incorrect formatting. Please enter coordinate again"
+    );
+    console.log(`the inputPlateau save ${inputPlateau}`)
+    const inputPosition = await inputWithValidation(
+        "Enter the rover initial position (number number direction):",
+        isValidPosition,
+        "Your input is not of the format x y direction"
+    );
     const rover = createRover(inputPlateau, inputPosition);
     let inputAdditionalMoves = "Y";
     if (inputAdditionalMoves === "Y") {
         do {
-            const inputInstructions = await input("Enter instructions to move the rover:");
+            const inputInstructions = await inputWithValidation(
+                "Enter instructions to move the rover (L,R or M):",
+                isValidInstructions,
+                "Invalid set of instructions. Must only contain L, R or M"
+                );
             const currentPosition = moveRover(rover, inputInstructions);
             console.log(`Rover's current position: ${currentPosition.x} ${currentPosition.y} ${currentPosition.direction}`);
-            inputAdditionalMoves = await input("Would you like to move the Rover again?");
+            inputAdditionalMoves = await input("Would you like to move the Rover again? Y/N");
         } while (inputAdditionalMoves === "Y");
     }
     console.log("Rover out");
