@@ -7,9 +7,9 @@ export class Rover {
     position: Position;
 
     constructor(id: number = 1, plateau: Plateau, position: Position) {
-        // if(!isValidMove(position, plateau)) {
-        //     throw new Error("Rover's initial position is invalid. Cannot land outside of the plateau or on another rover")
-        // }
+        if (!isValidMove(position, plateau)) {
+            throw new Error("Rover's initial position is invalid. Cannot land outside of the plateau or on another rover")
+        }
         this.id = id;
         this.plateau = plateau;
         this.position = position;

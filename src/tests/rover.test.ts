@@ -57,8 +57,24 @@ describe("does not move rover if next move is off the plateau", () => {
   });
 });
 
-// describe("does not move rover if there is another rover", () => {
-//   it("should return the initial position", () => {
-//     expect(makeMove({ x: 1, y: 2, direction: "N" }, plateauWithRovers, "M")).toEqual({ x: 1, y: 2, direction: "N" });
-//   });
-// });
+describe("does not move rover if there is another rover", () => {
+  it("should return the initial position", () => {
+    expect(makeMove({ x: 1, y: 2, direction: "N" }, plateauWithRovers, "M")).toEqual({ x: 1, y: 2, direction: "N" });
+  });
+});
+
+describe("should not create a rover if the initial position is not valid", () => {
+  it("should throw an error if a rover is already there", () => {
+    expect(() => {
+      new Rover(2, plateauWithRovers, { x: 1, y: 3, direction: "N" })
+    }).toThrow("Rover's initial position is invalid. Cannot land outside of the plateau or on another rover");
+  });
+  it("should throw an error if position is not on the Plateau", () => {
+    expect(() => {
+      new Rover(2, plateauWithRovers, { x: -1, y: 2, direction: "N" })
+    }).toThrow("Rover's initial position is invalid. Cannot land outside of the plateau or on another rover");
+    expect(() => {
+      new Rover(2, plateauWithRovers, { x: 1, y: 6, direction: "N" })
+    }).toThrow("Rover's initial position is invalid. Cannot land outside of the plateau or on another rover");
+  });
+});
