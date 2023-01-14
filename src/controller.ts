@@ -1,3 +1,7 @@
+/**
+ * This file contains validation and user input parsing functions
+ */
+
 import { Coord, Position } from "./types";
 import { Rover } from "./rover";
 import { Plateau } from "./plateau";

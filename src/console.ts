@@ -1,3 +1,7 @@
+/**
+ * This file contains the console functions that make up the user interface of the app
+ */
+
 import * as readline from 'node:readline';
 import { createRover, moveRover, isValidCoord, isAPositiveInteger, isValidPosition, isValidInstructions, setPlateau } from './controller';
 import { Plateau } from './plateau';
