@@ -1,5 +1,5 @@
 import * as readline from 'node:readline';
-import { createRover, moveRover, isValidCoord, isValidPosition, isValidInstructions, setPlateau } from './controller';
+import { createRover, moveRover, isValidCoord, isAPositiveInteger, isValidPosition, isValidInstructions, setPlateau } from './controller';
 import { Plateau } from './plateau';
 import { Rover } from './rover';
 
@@ -48,10 +48,6 @@ export async function consolePlateauSetup() {
 	return plateau;
 }
 
-const isAPositiveInteger = (input: string) => {
-	const int = parseInt(input);
-	return isNaN(int) && int > 0;
-}
 
 export async function consoleRoverNumberSetup() {
 	const numberOfRovers = await inputWithValidation(

@@ -23,6 +23,11 @@ export function setPlateau(inputCoord: string) {
     else throw new Error("Not a valid coordinate. Must be number space number");
 }
 
+export const isAPositiveInteger = (input: string) => {
+	const int = parseInt(input);
+	return !isNaN(int) && int > 0;
+}
+
 export function inputToPosition(inputPosition: string): Position {
     const positionArray = inputPosition.split(" ");
     if (positionArray[2] === "N" || positionArray[2] === "E" || positionArray[2] === "S" || positionArray[2] === "W") {
