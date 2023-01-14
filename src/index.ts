@@ -16,9 +16,9 @@ export async function startRover() {
         isValidPosition,
         "Your input is not of the format x y direction"
     );
-    const rover = createRover(plateau, inputPosition);
+    const rover = createRover(1, plateau, inputPosition);
     print("Rover created");
-    console.log(plateau.getRoverPositions());
+    console.log(plateau.roverPositions);
     let inputAdditionalMoves = "Y";
     if (inputAdditionalMoves === "Y") {
         do {
@@ -41,7 +41,7 @@ export async function startRover() {
             isValidPosition,
             "Your input is not of the format x y direction"
         );
-        const addtionalRover = createRover(plateau, inputPosition);
+        const addtionalRover = createRover(2, plateau, inputPosition);
         print("Additional Rover created");
     }
     // moves other rover

@@ -3,7 +3,7 @@ import { Plateau } from '../plateau';
 
 const newPlateau = new Plateau({ x: 5, y: 5 });
 const plateauWithRovers = new Plateau({ x: 5, y: 5 });
-plateauWithRovers.addRover(new Rover(plateauWithRovers, { x: 1, y: 3, direction: "N"}));
+plateauWithRovers.addRover(new Rover(1, plateauWithRovers, { x: 1, y: 3, direction: "N"}));
 
 describe("rotates rover", () => {
   it("should rotate 90 degrees to the left", () => {

@@ -2,10 +2,15 @@ import { Coord, Position, directions, DirectionType, instructions, InstructionTy
 import { Plateau } from "./plateau";
 
 export class Rover {
+    id: number;
     plateau: Plateau;
     position: Position;
 
-    constructor(plateau: Plateau, position: Position) {
+    constructor(id: number = 1, plateau: Plateau, position: Position) {
+        // if(!isValidMove(position, plateau)) {
+        //     throw new Error("Rover's initial position is invalid. Cannot land outside of the plateau or on another rover")
+        // }
+        this.id = id;
         this.plateau = plateau;
         this.position = position;
         plateau.addRover(this);
@@ -13,6 +18,7 @@ export class Rover {
 
     move(instructions: Array<string>) {
         this.position = takeInstructions(this.position, this.plateau, instructions);
+        this.plateau.updatePositions({id: this.id, position: this.position});
     }
 };
 
