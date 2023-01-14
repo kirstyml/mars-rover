@@ -27,3 +27,5 @@ Once you have npm installed, you can run the code.
 
 - If the tests pass. You can start the script by running `npm start`
 
+- You can run eslint by running `npm run lint` and with the `--fix` option by running `npm run lint-fix`
+

@@ -1,4 +1,4 @@
-import { Coord, Position, directions, instructions, InstructionType } from "./types";
+import { Coord, Position } from "./types";
 import { Rover } from "./rover";
 import { Plateau } from "./plateau";
 
@@ -13,7 +13,7 @@ export function inputToCoord(inputCoord: string): Coord {
         x: parseInt(coordArray[0]),
         y: parseInt(coordArray[1])
     }
-};
+}
 
 export function setPlateau(inputCoord: string) {
     if (isValidCoord(inputCoord)) {
@@ -38,7 +38,7 @@ export function inputToPosition(inputPosition: string): Position {
         }
     }
     else throw new Error("not a valid position. Direction must be a compass point");
-};
+}
 
 export function isValidPosition(inputPosition: string): boolean {
     const positionArray = inputPosition.split(" ");
@@ -68,7 +68,7 @@ export function isValidInstructions(instructionsInput: string): boolean {
     return instructionArray.every(item => item === "L" || item === "R" || item === "M") && instructionArray.length > 0;
 }
 
-export function createRover(id: number = 1, plateau: Plateau, positionInput: string) {
+export function createRover(id = 1, plateau: Plateau, positionInput: string) {
     const initialPosition = setInitialPosition(positionInput);
     return new Rover(id, plateau, initialPosition);
 }

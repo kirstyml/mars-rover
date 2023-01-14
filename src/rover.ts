@@ -1,4 +1,4 @@
-import { Coord, Position, directions, DirectionType, instructions, InstructionType } from "./types"
+import { Position, directions, InstructionType } from "./types"
 import { Plateau } from "./plateau";
 
 export class Rover {
@@ -6,7 +6,7 @@ export class Rover {
     plateau: Plateau;
     position: Position;
 
-    constructor(id: number = 1, plateau: Plateau, position: Position) {
+    constructor(id = 1, plateau: Plateau, position: Position) {
         if (!isValidMove(position, plateau, id)) {
             throw new Error("Rover's initial position is invalid. Cannot land outside of the plateau or on another rover")
         }
@@ -20,7 +20,7 @@ export class Rover {
         this.position = takeInstructions(this.position, this.plateau, instructions, this.id);
         this.plateau.updatePositions({ id: this.id, position: this.position });
     }
-};
+}
 
 //TODO: can get Array<InstructionType> working
 export function takeInstructions(initialPosition: Position, plateau: Plateau, instructionSet: Array<string>, id: number) {
