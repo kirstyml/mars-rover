@@ -18,7 +18,7 @@ export class Rover {
 
     move(instructions: Array<string>) {
         this.position = takeInstructions(this.position, this.plateau, instructions);
-        this.plateau.updatePositions({id: this.id, position: this.position});
+        this.plateau.updatePositions({ id: this.id, position: this.position });
     }
 };
 
@@ -27,7 +27,7 @@ export function takeInstructions(initialPosition: Position, plateau: Plateau, in
     let nextPosition = { ...initialPosition }
     for (let i = 0; i <= instructionSet.length - 1; i++) {
         const inst = instructionSet[i];
-        if(inst === "L" || inst === "R" || inst === "M") {
+        if (inst === "L" || inst === "R" || inst === "M") {
             nextPosition = makeMove(nextPosition, plateau, inst);
         }
         else console.log("invalid move.");

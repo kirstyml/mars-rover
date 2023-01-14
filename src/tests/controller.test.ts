@@ -1,14 +1,14 @@
-import { 
-    inputToCoord, 
-    setPlateau, 
-    isValidCoord, 
-    isValidPosition, 
-    inputToPosition, 
+import {
+    inputToCoord,
+    setPlateau,
+    isValidCoord,
+    isValidPosition,
+    inputToPosition,
     setInitialPosition,
     isValidInstructions,
     setInstructionSet
- } from '../controller';
- import { Plateau } from '../plateau';
+} from '../controller';
+import { Plateau } from '../plateau';
 
 describe("inputToCoord takes a string and returns a valid Coord", () => {
     it("should return a Coord type from a valid string", () => {
@@ -79,7 +79,7 @@ describe("inputToPosition takes a string and returns a valid Position", () => {
 describe("setInitialPosition validates the user input position and returns the InitialPosition", () => {
     it("should return a position type from a string: digit space digit", () => {
         expect(setInitialPosition("1 2 N")).toEqual({ x: 1, y: 2, direction: "N" });
-        expect(setInitialPosition("111 222 E")).toEqual({ x: 111, y: 222, direction: "E"});
+        expect(setInitialPosition("111 222 E")).toEqual({ x: 111, y: 222, direction: "E" });
     });
     it("should throw an error if the user input is the wrong format", () => {
         expect(() => {
@@ -105,7 +105,7 @@ describe("isValidInstruction takes a string and true if it is a valid position",
 
 describe("setInstructionSet should return a valid array of instructions", () => {
     it("should return a position type from a string: digit space digit", () => {
-        expect(setInstructionSet("LMLMLM")).toEqual(["L","M","L","M","L","M"]);
+        expect(setInstructionSet("LMLMLM")).toEqual(["L", "M", "L", "M", "L", "M"]);
         expect(setInstructionSet("R")).toEqual(["R"]);
     });
     it("should throw an error if the user input is the wrong format", () => {

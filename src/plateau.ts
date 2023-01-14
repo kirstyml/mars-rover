@@ -1,4 +1,4 @@
-import { Coord, Position, RoverRef } from "./types";
+import { Coord, RoverRef } from "./types";
 import { Rover } from "./rover";
 
 export class Plateau {
@@ -6,7 +6,7 @@ export class Plateau {
     maxY: number;
     minX: number;
     minY: number;
-    roverPositions: Array<RoverRef> ;
+    roverPositions: Array<RoverRef>;
 
     constructor(maxCoord: Coord, roverPositions: Array<RoverRef> = []) {
         this.maxX = maxCoord.x;
@@ -21,7 +21,7 @@ export class Plateau {
     }
 
     addRover(newRover: Rover) {
-        this.roverPositions.push({id: newRover.id, position: newRover.position});
+        this.roverPositions.push({ id: newRover.id, position: newRover.position });
     }
 
     updatePositions(update: RoverRef) {
