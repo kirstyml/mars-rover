@@ -16,14 +16,14 @@ export class Rover {
         plateau.addRover(this);
     }
 
-    move(instructions: Array<string>) {
+    move(instructions: Array<InstructionType>) {
         this.position = takeInstructions(this.position, this.plateau, instructions, this.id);
         this.plateau.updatePositions({ id: this.id, position: this.position });
     }
 }
 
 //TODO: can get Array<InstructionType> working
-export function takeInstructions(initialPosition: Position, plateau: Plateau, instructionSet: Array<string>, id: number) {
+export function takeInstructions(initialPosition: Position, plateau: Plateau, instructionSet: Array<InstructionType>, id: number) {
     let nextPosition = { ...initialPosition }
     for (let i = 0; i <= instructionSet.length - 1; i++) {
         const inst = instructionSet[i];
@@ -48,7 +48,6 @@ export function isValidMove(position: Position, plateau: Plateau, id: number) {
     return xPositionValid && yPositionValid && !roverInWay;
 }
 
-//TODO: can get Array<InstructionType> working
 export function makeMove(initialPosition: Position, plateau: Plateau, instruction: InstructionType, id: number) {
     const endPosition = { ...initialPosition };
     const indexCurrentDirection = directions.indexOf(initialPosition.direction);

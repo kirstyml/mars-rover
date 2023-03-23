@@ -2,7 +2,7 @@
  * This file contains validation and user input parsing functions
  */
 
-import { Coord, Position } from "./types";
+import { Coord, InstructionType, Position } from "./types";
 import { Rover } from "./rover";
 import { Plateau } from "./plateau";
 
@@ -56,18 +56,15 @@ export function setInitialPosition(inputPosition: string): Position {
     else throw new Error("Not a valid position. Must be number space number");
 }
 
-export function setInstructionSet(instructionsInput: string): Array<string> {
+export function setInstructionSet(instructionsInput: string): Array<InstructionType> {
     const isValid = isValidInstructions(instructionsInput);
     if (isValid) {
-        return instructionsInput.split("");
+        return instructionsInput.split("") as Array<InstructionType>;
     }
-    // HELP: cannot get typescript to recognise that this is an array of instructions
-    // My solution is to keep as an array of strings and check type of each item in the array in the move 
-    // method in the rover class.
     else throw new Error("Not a valid instruction string. Must only contain the characters L R or M");
 }
 
-export function isValidInstructions(instructionsInput: string): boolean {
+export function isValidInstructions(instructionsInput: string): boolean  {
     const instructionArray = instructionsInput.split("");
     return instructionArray.every(item => item === "L" || item === "R" || item === "M") && instructionArray.length > 0;
 }
