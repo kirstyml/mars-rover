@@ -15,7 +15,7 @@ export interface Position {
 export const instructions = ["L", "R", "M"] as const;
 export type InstructionType = "L" | "R" | "M";
 
-export interface RoverRef {
+export interface RoverWithPosition {
     id: number,
     position: Position
 }
