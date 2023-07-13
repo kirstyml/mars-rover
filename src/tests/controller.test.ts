@@ -8,6 +8,7 @@ import {
     isValidInstructions,
     setInstructionSet
 } from '../controller';
+import { Mission } from '../mission';
 import { Plateau } from '../plateau';
 
 describe("inputToCoord takes a string and returns a valid Coord", () => {
@@ -33,22 +34,22 @@ describe("isValidCoord takes a string and true if it is a valid coord", () => {
 
 describe("setPlateau validates the user input coord and returns the Plateau coord", () => {
     it("should return a Coord type from a string: digit space digit", () => {
-        expect(setPlateau("1 2")).toEqual(new Plateau({ x: 1, y: 2 }));
-        expect(setPlateau("111 222")).toEqual(new Plateau({ x: 111, y: 222 }));
+        expect(setPlateau("1 2", new Mission)).toEqual(new Plateau({ x: 1, y: 2 }));
+        expect(setPlateau("111 222", new Mission)).toEqual(new Plateau({ x: 111, y: 222 }));
     });
     it("should throw an error if the user input contains a letter", () => {
         expect(() => {
-            setPlateau("1 F")
+            setPlateau("1 F", new Mission)
         }).toThrow();
     });
     it("should throw an error if the user input digits are not separated by a space", () => {
         expect(() => {
-            setPlateau("12")
+            setPlateau("12", new Mission)
         }).toThrow();
     });
     it("should throw an error if the user input is empty", () => {
         expect(() => {
-            setPlateau("")
+            setPlateau("", new Mission)
         }).toThrow();
     });
 });
